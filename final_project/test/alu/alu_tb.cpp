@@ -18,27 +18,24 @@ int main()
 {
     Valu *alu = new Valu;
 
-    // Test Case 1
     alu->A = 49911;    // 1100001011110111
     alu->B = 6755;     // 0001101001100011
     alu->ALU_Sel = 14; // 1110
-    alu->mode = 1;     // Logic mode
+    alu->mode = 1;     // logic mode
     alu->eval();
     print_test(1, alu->A, alu->B, alu->ALU_Sel, alu->mode, alu->ALU_Result);
 
-    // Test Case 2
     alu->A = 27956;   // 0110110011010100
     alu->B = 40161;   // 1001110011100001
     alu->ALU_Sel = 4; // 0100
-    alu->mode = 0;    // Arithmetic mode
+    alu->mode = 0;    // arithmetic mode
     alu->eval();
     print_test(2, alu->A, alu->B, alu->ALU_Sel, alu->mode, alu->ALU_Result);
 
-    // Test Case 3
     alu->A = 51893;   // 1100101010110101
     alu->B = 19648;   // 0100110010000000
     alu->ALU_Sel = 1; // 0011
-    alu->mode = 0;    // Arithmetic mode
+    alu->mode = 0;    // arithmetic mode
     alu->eval();
     print_test(3, alu->A, alu->B, alu->ALU_Sel, alu->mode, alu->ALU_Result);
 

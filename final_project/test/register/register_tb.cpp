@@ -2,10 +2,9 @@
 #include "Vregister.h"
 #include <iostream>
 #include <bitset>
-#include <cstdlib> // For rand()
-#include <ctime>   // For seeding rand()
+#include <cstdlib> // rand()
+#include <ctime>
 
-// Function to print test results
 void print_test(int test_num, uint16_t data_in, uint8_t reset, uint8_t enable, uint16_t data_out)
 {
     std::cout << "Test " << test_num << ":" << std::endl;
@@ -20,21 +19,18 @@ int main()
 {
     Vregister *reg = new Vregister;
 
-    // Seed random number generator
     std::srand(std::time(nullptr));
 
-    // Test 1: Write data with enable set
     reg->clk = 0;
     reg->reset = 0;
     reg->enable = 1;
-    reg->data_in = std::rand() % 65536; // Random 16-bit value
+    reg->data_in = std::rand() % 65536;
     reg->clk = 1;
     reg->eval(); // Rising edge
     reg->clk = 0;
     reg->eval(); // Falling edge
     print_test(1, reg->data_in, reg->reset, reg->enable, reg->data_out);
 
-    // Test 2: Reset the register
     reg->reset = 1;
     reg->clk = 1;
     reg->eval(); // Rising edge
@@ -45,7 +41,7 @@ int main()
     // Test 3: Disable writing (retain previous value)
     reg->reset = 0;
     reg->enable = 0;
-    reg->data_in = std::rand() % 65536; // Random value (shouldn't be written)
+    reg->data_in = std::rand() % 65536;
     reg->clk = 1;
     reg->eval(); // Rising edge
     reg->clk = 0;
@@ -54,7 +50,7 @@ int main()
 
     // Test 4: Write new data after reset
     reg->enable = 1;
-    reg->data_in = std::rand() % 65536; // Random 16-bit value
+    reg->data_in = std::rand() % 65536;
     reg->clk = 1;
     reg->eval(); // Rising edge
     reg->clk = 0;

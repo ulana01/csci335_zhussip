@@ -2,8 +2,8 @@
 #include "Vmux.h"
 #include <iostream>
 #include <bitset>
-#include <cstdlib> // For rand()
-#include <ctime>   // For seeding rand()
+#include <cstdlib> // rand()
+#include <ctime>
 
 void print_test(int test_num, uint16_t in[8], uint8_t sel, uint16_t out)
 {
@@ -21,14 +21,13 @@ int main()
 {
     Vmux *mux = new Vmux;
 
-    // Seed random number generator
     std::srand(std::time(nullptr));
 
     for (int test_num = 1; test_num <= 3; ++test_num)
     {
         uint16_t inputs[8];
 
-        // Generate random inputs and assign them explicitly to mux
+        // generate random inputs
         inputs[0] = std::rand() % 65536;
         mux->in0 = inputs[0];
         inputs[1] = std::rand() % 65536;
@@ -46,14 +45,12 @@ int main()
         inputs[7] = std::rand() % 65536;
         mux->in7 = inputs[7];
 
-        // Generate a random selection signal (0 to 7)
+        // generate a random selection signal
         uint8_t mux_sel = std::rand() % 8;
         mux->mux_sel = mux_sel;
 
-        // Evaluate the MUX
         mux->eval();
 
-        // Print the test results
         print_test(test_num, inputs, mux_sel, mux->out);
     }
 
